@@ -1,4 +1,13 @@
-.profile_header h1 {
-    color: blue;
+.profile-text p, h1 {
+    color: #757575;
+    font-family: 'Open Sans', sans-serif;
 }
 
+.profile-header {
+    margin-top: 30px;
+    margin-bottom: 90px;
+}
+
+body {
+    background-color: #fafafa;
+}
