@@ -33,6 +33,18 @@ Entre na pasta que contém seu virtualenv e use:
 Com o virtualenv ativado, instale o Django através do pip:
 > pip install django
 
-#### **6. Fazer deploy local**
+
+#### **6. Faça as migrações necessárias**
+Após a instalação do django, migre o banco de dados da aplicação:
+> python manage.py migrate
+
+
+#### **7. Colete os arquivos estaticos**
+Colete alguns dos arquivos estáticos da aplicação:
+> python manage.py collectstatic
+
+
+
+#### **8. Fazer deploy local**
 Rode o seguinte comando e depois acesse [este endereço](http://127.0.0.1:8000).
 > python manage.py runserver
