@@ -1,30 +1,43 @@
-<div class="container">
-    <h1> Faça o login abaixo: </h1>
+{% load staticfiles %}
 
-        <form method="post" action="{% url 'login' %}">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+</head>
+
+<div class="login-block">
+    <img src={% static 'img/LogoTrans.png' %} class="logo">
+
+    <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
-
-            <p class="bs-component">
-                <table>
-                    <tr>
-                        <td>{{ form.username.label_tag }}</td>
-                        <td>{{ form.username }}</td>
-                    </tr>
-                    <tr>
-                        <td>{{ form.password.label_tag }}</td>
-                        <td>{{ form.password }}</td>
-                    </tr>
-                </table>
-            </p>
+            <div class="form-group">
+                <input 
+                    name="username"
+                    type="text" 
+                    placeholder="Nome de Usuário" 
+                    class="form-control"
+                     />
+            </div>
+            <div class="form-group">
+                <input 
+                    name="password"
+                    type="password" 
+                    placeholder="Senha" 
+                    class="form-control"
+                    />
+            </div>
             <p class="bs-component">
                 <center>
-                    <input class="btn btn-success btn-sm" type="submit" value="login" />
+                    <input class="btn btn-primary btn-block" type="submit" value="Login" />
                 </center>
             </p>
             <input type="hidden" name="next" value="{{ next }}" />
         </form>
 
         {% if form.errors %}
-            <p>Your username and password didn't match. Please try again.</p>
+            <center>
+                <p>Senha ou usuário incorretos!</p>
+            </center>
         {% endif %}
 </div>
