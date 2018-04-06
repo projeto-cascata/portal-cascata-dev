@@ -1,6 +1,9 @@
-# Portal Cascata Develop
+# Portal Cascata
 
-Repositório destinado ao desenvolvimento do Projeto Cascata
+![PyPI - Python Version](https://img.shields.io/badge/python-3-blue.svg?longCache=true&style=flat-square)
+![Django Version](https://img.shields.io/badge/django-2.0-blue.svg?longCache=true&style=flat-square)
+
+Repositório destinado ao desenvolvimento do Portal Cascata, aplicação *web* para auxiliar no gerenciamento e comunicação do Projeto Cascata.
 
 Para participar do desenvolvimento do projeto, deve-se seguir os seguintes passos:
 
@@ -33,18 +36,20 @@ Entre na pasta que contém seu virtualenv e use:
 Com o virtualenv ativado, instale o Django através do pip:
 > pip install django
 
+#### **6. Instale as dependências do projeto**
+Para instalar dependências adicionais, contidas no arquivo requirements.txt:
+> pip install -r requirements.txt
 
-#### **6. Faça as migrações necessárias**
+#### **7. Faça as migrações necessárias**
 Após a instalação do django, migre o banco de dados da aplicação:
 > python manage.py migrate
 
 
-#### **7. Colete os arquivos estaticos**
+#### **8. Colete os arquivos estaticos**
 Colete alguns dos arquivos estáticos da aplicação:
 > python manage.py collectstatic
 
 
-
-#### **8. Fazer deploy local**
+#### **9. Fazer deploy local**
 Rode o seguinte comando e depois acesse [este endereço](http://127.0.0.1:8000).
 > python manage.py runserver

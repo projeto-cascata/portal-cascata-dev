@@ -12,5 +12,4 @@ def profile(request, user_id):
     context = {
         'user': user,
     }
-    print(user)
     return render(request, 'user_profile.html', context)
