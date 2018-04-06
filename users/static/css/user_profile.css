@@ -8,6 +8,11 @@
     margin-bottom: 90px;
 }
 
+.img-thumbnail.rounded-circle.profile-pic {
+    max-width: 300px;
+    max-height: 300px;
+}
+
 body {
     background-color: #fafafa;
 }

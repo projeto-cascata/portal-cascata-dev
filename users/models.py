@@ -24,3 +24,4 @@ class User(models.Model):
     date_birth = models.DateField(blank=False)
     number = models.IntegerField(blank=False)
     email = models.CharField(max_length=200, blank=False)
+    picture = models.ImageField(upload_to='images/', default='images/default.svg')
