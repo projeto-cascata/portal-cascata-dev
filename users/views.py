@@ -13,3 +13,6 @@ def profile(request, user_id):
         'user': user,
     }
     return render(request, 'user_profile.html', context)
+
+def members_list(request):
+    return render(request, 'members_list.html', {})
