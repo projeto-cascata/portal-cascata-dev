@@ -1,0 +1,36 @@
+{% load staticfiles %}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/user_profile.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container profile-text">
+        <div class="profile-header">
+            <h1 class="display-5">Perfil de Usuário - {{ user.name }}</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <img alt="User Pic" src="{{ user.picture.url }}"
+                class="img-thumbnail rounded-circle profile-pic">
+            </div>
+            <div class="col-md-6">
+                <p class="h2"><b>Dados do Usuário</b></p>
+                <div class="row">
+                    <div class="col-md-6 offset-md-1">
+                        <p class="h3">Nome Completo</p>
+                        <p class="h5">{{ user.name }}</p>
+                        <p class="h3">E-mail</p>
+                        <p class="h5">{{ user.email }}</p>       
+                        <p class="h3">Matrícula</p>
+                        <p class="h5">{{ user.enrollment }}</p>        
+                        <p class="h3">Telefone</p>        
+                        <p class="h3">{{ user.phone_number }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
