@@ -5,7 +5,7 @@ def generate_enrollment():
     now = datetime.datetime.now()
     year = str(abs(now.year) % 100)
 
-    users = Users.objects.all()
+    users = User.objects.all()
     if not users:
         return (year + "0000")
 

@@ -9,7 +9,7 @@
 <body>
     <div class="container profile-text">
         <div class="profile-header">
-            <h1 class="display-5">Perfil de Usuário - Felipe</h1>
+            <h1 class="display-5">Perfil de Usuário - {{ user.name }}</h1>
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -21,13 +21,13 @@
                 <div class="row">
                     <div class="col-md-6 offset-md-1">
                         <p class="h3">Nome Completo</p>
-                        <p class="h5">Felipe Hargreaves</p>
+                        <p class="h5">{{ user.name }}</p>
                         <p class="h3">E-mail</p>
-                        <p class="h5">exemplo@exe.mplo</p>       
+                        <p class="h5">{{ user.email }}</p>       
                         <p class="h3">Matrícula</p>
-                        <p class="h5">0011122</p>        
+                        <p class="h5">{{ user.enrollment }}</p>        
                         <p class="h3">Telefone</p>        
-                        <p class="h3">(61)3333-4444</p>
+                        <p class="h3">{{ user.number }}</p>
                     </div>
                 </div>
             </div>
