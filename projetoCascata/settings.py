@@ -27,7 +27,8 @@ SECRET_KEY = '^--kb4f2hfbon6*(tk--ohw63tv*dys0@mprxq0hcnxs*iqbn$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
+
 
 # Application definition
 
@@ -81,7 +82,7 @@ WSGI_APPLICATION = 'projetoCascata.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'cascata-db',
         'USER': 'postgres',
         'HOST': 'db',
         'PORT': 5432,
