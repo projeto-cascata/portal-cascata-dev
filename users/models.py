@@ -33,3 +33,4 @@ class UserData(models.Model):
     picture = models.ImageField(upload_to='images/', default='images/default.svg')
 
 
+
