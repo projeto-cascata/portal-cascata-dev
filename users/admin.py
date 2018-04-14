@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
-from .models import UserData, Student
+from .models import UserData
 
 class UserDataInline(admin.StackedInline):
     model = UserData
@@ -18,6 +18,11 @@ class UserAdmin(BaseUserAdmin):
             'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')
         })
+    )
+    add_fieldsets = (
+        ('Geral', {
+            'fields': ('username', 'password1', 'password2', 'email', 'first_name', 'last_name')
+        }),
     )
     inlines = (UserDataInline, )
 
