@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from users.models import Account, DefaultUser, Student, Parent
+from .models import Account, DefaultUser, Student, Parent
 
 @admin.register(DefaultUser)
 class DefaultUserAdmin(UserAdmin):

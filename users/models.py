@@ -4,8 +4,9 @@ from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
-from projetoCascata import settings
 
 def generate_enrollment():
     now = datetime.datetime.now()
@@ -61,8 +62,6 @@ class Account(AbstractBaseUser, PermissionsMixin):
         full_name = '%s %s' % (self.first_name, self.last_name)
         return full_name.strip()
 
-    def get_short_name(self):
-        return self.first_name
 
     def __str__(self):
         return self.email
