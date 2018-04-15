@@ -82,3 +82,19 @@ class DefaultUser(Account):
 
     def __str__(self):
         return self.get_full_name()
+
+class Student(DefaultUser):
+    class Meta:
+        verbose_name = 'Aluno'
+        verbose_name_plural = 'Alunos'
+
+class Parent(models.Model):
+    student = models.OneToOneField(Student, on_delete=models.CASCADE)
+    email = models.EmailField(unique=True)    
+    first_name = models.CharField(max_length=40, blank=False)
+    last_name = models.CharField(max_length=80, blank=False)
+    cpf = models.CharField('CPF', max_length=11, validators=[MinLengthValidator(11)], blank=False)
+
+    class Meta:
+        verbose_name = 'Responsável'
+        verbose_name = 'Responsáveis'
