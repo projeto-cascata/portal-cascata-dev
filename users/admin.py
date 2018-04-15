@@ -4,10 +4,12 @@ from users.models import Account, DefaultUser, Student, Parent
 
 @admin.register(DefaultUser)
 class DefaultUserAdmin(UserAdmin):
+    readonly_fields: ('password')
     fieldsets = (
         ('Geral', {
             'fields': (
                 'email',
+                'password',
                 'first_name',
                 'last_name',
             )

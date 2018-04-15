@@ -9,7 +9,7 @@
 <body>
     <div class="container profile-text">
         <div class="profile-header">
-            <h1 class="display-5">Perfil de Usuário - {{ user.name }}</h1>
+            <h1 class="display-5">Perfil de Usuário - {{ user.first_name }}</h1>
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-md-6 offset-md-1">
                         <p class="h3">Nome Completo</p>
-                        <p class="h5">{{ user.name }}</p>
+                        <p class="h5">{{ user.get_full_name }}</p>
                         <p class="h3">E-mail</p>
                         <p class="h5">{{ user.email }}</p>       
                         <p class="h3">Matrícula</p>
