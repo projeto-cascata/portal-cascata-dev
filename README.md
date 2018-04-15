@@ -7,6 +7,7 @@ Repositório destinado ao desenvolvimento do Portal Cascata, aplicação *web* p
 
 Para participar do desenvolvimento do projeto, deve-se seguir os seguintes passos:
 
+## Virtualenv
 
 #### **1. Instale o Pip**
 Para visualizar se você possui o pip instalado, use:
@@ -36,20 +37,22 @@ Entre na pasta que contém seu virtualenv e use:
 Com o virtualenv ativado, instale o Django através do pip:
 > pip install django
 
-#### **6. Instale as dependências do projeto**
-Para instalar dependências adicionais, contidas no arquivo requirements.txt:
-> pip install -r requirements.txt
+## Docker
 
-#### **7. Faça as migrações necessárias**
-Após a instalação do django, migre o banco de dados da aplicação:
+É necessário ter o [Docker](https://docs.docker.com/install/) e o [docker-compose](https://docs.docker.com/compose/install/) instalados para a execução do projeto. Após a instalação dos mesmos, dentro do diretório raiz do projeto seguir os seguintes passos:
+
+#### **1. Subir os containers de desenvolvimento**
+O projeto é composto por dois containers, um com o projeto do Django e outro contendo a base de dados PostgreSQL. Para subi-los:
+> docker-compose up 
+
+A janela de terminal onde os containers estão rodando deve continuar aberta enquanto se estiver desenvolvendo. Para parar os containers, use Ctrl-C na mesma janela e aguarde.
+
+#### **2. Faça as migrações necessárias:**
+Em outra janela de terminal, acesse o container do projeto através de:
+> docker exec -it portalcascatadev_web_1 bash
+
+E dentro da shell do container, execute o comando para as migrações:
 > python manage.py migrate
 
-
-#### **8. Colete os arquivos estaticos**
-Colete alguns dos arquivos estáticos da aplicação:
-> python manage.py collectstatic
-
-
-#### **9. Fazer deploy local**
-Rode o seguinte comando e depois acesse [este endereço](http://127.0.0.1:8000).
-> python manage.py runserver
+#### **3. Rode o projeto**
+Ao subir os containers, o site estará disponível no endereço [0.0.0.0:8000](http://127.0.0.1:8000).
