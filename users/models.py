@@ -1,38 +1,43 @@
 import datetime
 from django.db import models
-from django.contrib.auth import get_user_model
-from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import PermissionsMixin
 from django.core.validators import MinLengthValidator
 
-def generate_enrollment():
-    now = datetime.datetime.now()
-    year = str(abs(now.year) % 100)
+class AccountManager(BaseUserManager):
+    use_in_migrations = True
 
-    users = get_user_model().objects.all()
-    if not users:
-        return (year + "0000")
+    def _create_user(self, email, password, **extra_fields):
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
 
-    sorted_users = sorted(users, key=lambda user: user.enrollment, reverse=True)
+    def create_user(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
 
-    id = int(sorted_users[0].enrollment[2:])
-    id = id+1
+    def create_superuser(self, email, password, **extra_fields):
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_staff', True)
+        return self._create_user(email, password, **extra_fields)
 
-    return (year + str(id).zfill(4))
-
-class User(AbstractBaseUser):
-    enrollment = models.CharField('Matrícula', max_length=10, primary_key=True, default = generate_enrollment)
+class Account(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=40, blank=False)
     last_name = models.CharField(max_length=80, blank=False)
-    email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=True)
-    cpf = models.CharField(max_length=11, validators=[MinLengthValidator(11)], blank=False)
-    rg = models.CharField(max_length=20, blank=False)
-    date_birth = models.DateField(blank=False)
-    phone_number = models.IntegerField(blank=False)
-    picture = models.ImageField(upload_to='images/', default='images/default.svg')
+    is_staff = models.BooleanField(default=False)
 
-    USERNAME_FIELD = enrollment
-    REQUIRED_FIELDS = [first_name, email]
+    objects = AccountManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name']
+
+    class Meta:
+        verbose_name = 'Conta de Usuário'
+        verbose_name_plural = 'Contas de Usuário'
 
     def get_full_name(self):
         full_name = '%s %s' % (self.first_name, self.last_name)
@@ -40,4 +45,7 @@ class User(AbstractBaseUser):
 
     def get_short_name(self):
         return self.first_name
+
+    def __str__(self):
+        return self.email
 

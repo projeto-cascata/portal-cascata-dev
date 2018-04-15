@@ -137,3 +137,7 @@ Temporary Items
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+.vscode/
+
+# SQLite
+db.sqlite3
