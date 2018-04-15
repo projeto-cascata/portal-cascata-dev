@@ -42,9 +42,9 @@ class AccountManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 class Account(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=40, blank=False)
-    last_name = models.CharField(max_length=80, blank=False)
+    email = models.EmailField('e-mail', unique=True)
+    first_name = models.CharField('Nome', max_length=40, blank=False)
+    last_name = models.CharField('Sobrenome', max_length=80, blank=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
@@ -90,11 +90,11 @@ class Student(DefaultUser):
 
 class Parent(models.Model):
     student = models.OneToOneField(Student, on_delete=models.CASCADE)
-    email = models.EmailField(unique=True)    
-    first_name = models.CharField(max_length=40, blank=False)
-    last_name = models.CharField(max_length=80, blank=False)
+    email = models.EmailField('e-mail', unique=True)    
+    first_name = models.CharField('Nome', max_length=40, blank=False)
+    last_name = models.CharField('Sobrenome', max_length=80, blank=False)
     cpf = models.CharField('CPF', max_length=11, validators=[MinLengthValidator(11)], blank=False)
 
     class Meta:
         verbose_name = 'Responsável'
-        verbose_name = 'Responsáveis'
+        verbose_name_plural = 'Dados do Responsável'
