@@ -2,7 +2,25 @@ import datetime
 from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator
+
+from projetoCascata import settings
+
+def generate_enrollment():
+    now = datetime.datetime.now()
+    year = str(abs(now.year) % 100)
+
+    users = DefaultUser.objects.all()
+    if not users:
+        return (year + "0000")
+
+    sorted_users = sorted(users, key=lambda user: user.enrollment, reverse=True)
+
+    id = int(sorted_users[0].enrollment[2:])
+    id = id+1
+
+    return (year + str(id).zfill(4))
 
 class AccountManager(BaseUserManager):
     use_in_migrations = True
@@ -49,3 +67,18 @@ class Account(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+class DefaultUser(Account):
+    enrollment = models.CharField('Matrícula', max_length=10, unique=True, default=generate_enrollment)
+    
+    cpf = models.CharField('CPF', max_length=11, validators=[MinLengthValidator(11)], blank=False)
+    rg = models.CharField('RG', max_length=20, blank=False)
+    date_birth = models.DateField('Data de Nascimento', blank=False)
+    phone_number = models.CharField('Número de Telefone', max_length=15, blank=False)
+    picture = models.ImageField('Foto de Perfil', upload_to='images/', default='images/default.svg')
+
+    class Meta:
+        verbose_name = 'Membro'
+        verbose_name_plural = 'Membros'
+
+    def __str__(self):
+        return self.get_full_name()
