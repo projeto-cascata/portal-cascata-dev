@@ -4,7 +4,6 @@ from .models import Account, DefaultUser, Student, Parent
 
 @admin.register(DefaultUser)
 class DefaultUserAdmin(UserAdmin):
-    readonly_fields: ('password')
     fieldsets = (
         ('Geral', {
             'fields': (
@@ -39,8 +38,8 @@ class DefaultUserAdmin(UserAdmin):
         ('Geral', {
             'classes': ('wide',),
             'fields': (
-                'email', 
-                'password1', 
+                'email',
+                'password1',
                 'password2',
                 'first_name',
                 'last_name'
@@ -80,4 +79,3 @@ class StudentAdmin(DefaultUserAdmin):
     inlines = [
         ParentInline
     ]
-
