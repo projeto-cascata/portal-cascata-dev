@@ -5,7 +5,7 @@
       <!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.css' %}"  media="screen,projection"/>
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -13,8 +13,20 @@
 
     <body>
 
+        <nav>
+            <div class="nav-wrapper">
+                <img src="{% static 'images/Logo_Branco.png' %}" class="brand-logo"></img>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="">Início</a></li>
+                    <li><a href="">Conteúdos</a></li>
+                    <li><a href="">Membros</a></li>
+                    <li><a href="">Alunos</a></li>
+                </ul>
+            </div>
+        </nav>
+
         <!--JavaScript at end of body for optimized loading-->
-        <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/materialize.js' %}"></script>
         {% block content %}
         {% endblock %}
     </body>

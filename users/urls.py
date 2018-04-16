@@ -7,5 +7,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     url(r'^login/$', login, {'template_name': 'login.html'}, name='login'),
     path('profile/<int:user_id>/', views.profile),
-    url(r'^members_list/$', views.members_list)
+    url(r'^members_list/$', views.members_list),
 ]

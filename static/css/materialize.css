@@ -4271,10 +4271,10 @@ table span.badge {
 
 nav {
   color: #fff;
-  background-color: #ee6e73;
+  background-color: #2b2b2b;
   width: 100%;
-  height: 56px;
-  line-height: 56px;
+  height: 75px;
+  line-height: 75px;
 }
 
 nav.nav-extended {
@@ -4293,6 +4293,7 @@ nav.nav-extended .nav-content {
 
 nav a {
   color: #fff;
+  height: 25px;
 }
 
 nav i,
@@ -4329,11 +4330,14 @@ nav .sidenav-trigger i {
 }
 
 nav .brand-logo {
-  position: absolute;
+  align-self: center;
+
   color: #fff;
   display: inline-block;
   font-size: 2.1rem;
-  padding: 0;
+  padding-left: 75px;
+  height: 50px;
+  margin-top: 15px;
 }
 
 nav .brand-logo.center {
@@ -4349,7 +4353,7 @@ nav .brand-logo.center {
             transform: translateX(-50%);
   }
   nav .brand-logo.left, nav .brand-logo.right {
-    padding: 0;
+    padding: 20px;
     -webkit-transform: none;
             transform: none;
   }
@@ -4391,8 +4395,13 @@ nav ul li {
   padding: 0;
 }
 
+nav ul li:hover {
+  background-color: rgb(92, 92, 92);
+  height: 100%;
+}
+
 nav ul li.active {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgb(61, 61, 61);
 }
 
 nav ul a {
@@ -4403,6 +4412,7 @@ nav ul a {
   display: block;
   padding: 0 15px;
   cursor: pointer;
+  height: 75px;
 }
 
 nav ul a.btn, nav ul a.btn-large, nav ul a.btn-small, nav ul a.btn-large, nav ul a.btn-flat, nav ul a.btn-floating {
@@ -4417,7 +4427,11 @@ nav ul a.btn > .material-icons, nav ul a.btn-large > .material-icons, nav ul a.b
 }
 
 nav ul a:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgb(155, 155, 155);
+}
+
+a:hover {
+  color: rgb(20, 20, 20);
 }
 
 nav ul.left {
@@ -4473,14 +4487,14 @@ nav .input-field label.active i {
 
 @media only screen and (min-width: 601px) {
   nav.nav-extended .nav-wrapper {
-    min-height: 64px;
+    min-height: 80px;
   }
   nav, nav .nav-wrapper i, nav a.sidenav-trigger, nav a.sidenav-trigger i {
-    height: 64px;
-    line-height: 64px;
+    height: 80px;
+    line-height: 80px;
   }
   .navbar-fixed {
-    height: 64px;
+    height: 80px;
   }
 }
 
