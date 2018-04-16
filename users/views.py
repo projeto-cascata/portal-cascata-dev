@@ -12,7 +12,7 @@ def profile(request, user_id):
     context = {
         'user': user,
     }
-    return render(request, 'user_profile.html', context)
+    return render(request, 'users/user_profile.html', context)
 
 def members_list(request):
-    return render(request, 'members_list.html', {})
+    return render(request, 'users/members_list.html', {})

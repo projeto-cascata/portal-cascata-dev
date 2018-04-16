@@ -1,10 +1,5 @@
-{% load staticfiles %}
-
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/user_profile.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-</head>
+{% extends 'base.html' %}
+{% block content %}
 
 <body>
     <div class="container profile-text">
@@ -34,3 +29,5 @@
         </div>
     </div>
 </body>
+
+{% endblock %}
