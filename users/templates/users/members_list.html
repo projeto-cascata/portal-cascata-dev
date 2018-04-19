@@ -1,12 +1,36 @@
+<style>
+    .profile-picture { 
+      border-radius: 50%; 
+      margin-right: 20px;
+    }
+
+    #search {
+      float: right;
+      width: 30%;
+    }
+
+    .panel-heading {
+      display: inline-block;
+      width: 100%;
+    }
+
+    .panel-title {
+      display: inline-block;
+    }
+
+</style>
+
+
 {% extends 'base.html' %}
 {% block content %}
-
 
 <div class="container">
   <div class="row">
     <div class="panel panel-default user_panel">
       <div class="panel-heading">
-        <h3 class="panel-title">Alunos</h3>
+        <h3 class="panel-title"> Lista de Membros </h3>
+        <input id="search" type="text" onchange="filter_members()"
+          placeholder="Procurar.." style="width: 30%;margin-top: 20;">
       </div>
       <div class="panel-body">
         <div class="table-container">
@@ -22,108 +46,109 @@
                   <span>Email</span>
                 </th>
                 <th class="text-center">
-                  <span>Curso</span>
+                    <span> Setor </span>
+                  </th>
+                <th class="text-center">
+                  <span> Cargo </span>
                 </th>
+
+                {% comment %}
                 <th class="text-center">
                   <span>Status</span>
                 </th>
                 <th class="text-center">
-                  <span>Último acesso</span>
+                  <span>Último</span> <br>
+                  <span>acesso</span>
                 </th>
+                {% endcomment %}
+
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
                 <th>&nbsp;</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td width="10">
-                  <img class="pull-left img-circle nav-user-photo" width="50" src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Clint_Eastwood_at_2010_New_York_Film_Festival.jpg"
-                  />
-                </td>
-                <td>
-                  Clint Eastwood
-                  <br>
-                  <span class="user-description">Aluno</span>
-                </td>
-                <td>
-                  <i class="fa fa-envelope"></i>
-                  <a href="#">thegood@eastwood.com</a>
-                </td>
-                <td align="center">
-                  Matemática
-                </td>
-                <td align="center">
-                  Matriculado
-                  <br>
-                  <small class="text-muted">Cursando</small>
-                </td>
-                <td align="center">
-                  06/04/2018
-                  <br>
-                  <small class="text-muted">Hoje</small>
-                </td>
-              </tr>
-              <tr>
-                <td width="10">
-                  <img class="pull-left img-circle nav-user-photo" width="50" src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Lee_Van_Cleef_in_Stories_of_the_Century.jpg"
-                  />
-                </td>
-                <td>
-                  Lee Van Cleef
-                  <br>
-                  <span class="user-description">Aluno</span>
-                </td>
-                <td>
-                  <i class="fa fa-envelope"></i>
-                  <a href="#">thebad@cleef.com</a>
-                </td>
-                <td align="center">
-                  Química
-                </td>
-                <td align="center">
-                  Concluído
-                  <br>
-                  <small class="text-muted">Aprovado</small>
-                </td>
-                <td align="center">
-                  16/12/1989
-                  <br>
-                  <small class="text-muted">29 anos atrás</small>
-                </td>
-              </tr>
-              <tr>
-                <td width="10">
-                  <img class="pull-left img-circle nav-user-photo" width="50" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Eli_Wallach_-_publicity.jpg/440px-Eli_Wallach_-_publicity.jpg"
-                  />
-                </td>
-                <td>
-                  Eli Wallach
-                  <br>
-                  <span class="user-description">Aluno</span>
-                </td>
-                <td>
-                  <i class="fa fa-envelope"></i>
-                  <a href="#">theugly@wallach.com</a>
-                </td>
-                <td align="center">
-                  Física
-                </td>
-                <td align="center">
-                  Concluído
-                  <br>
-                  <small class="text-muted">Aprovado</small>
-                </td>
-                <td align="center">
-                  24/06/2014
-                  <br>
-                  <small class="text-muted">4 anos atrás</small>
-                </td>
-              </tr>
+              {% for member in members %}
+                <tr>
+                  <td width="10">
+                    <img class="profile-picture" src=../../media/{{member.picture}} height="60" width="60">
+                  </td>
+                  <td>
+                    {{member.first_name}} {{member.last_name}}
+                  </td>
+                  <td>
+                    <i class="fa fa-envelope"></i>
+                    <a href="#">{{member.email}}</a>
+                  </td>
+                  <td align="center">
+                      Pedagodia
+                  </td>
+                  <td align="center">
+                    Professor
+                  </td>
+
+                  {% comment %}
+                  <td align="center">
+                    {% if member.is_active %} Ativo
+                    {% else %} Desativado
+                    {% endif %}
+                  </td>
+                  <td align="center">
+                    {% if member.last_login == None %} Nunca
+                    {% else %} {{member.last_login}}
+                    {% endif %}
+                    <br>
+                    <small class="text-muted">
+                        Ontem
+                    </small>
+                  </td>
+                  {% endcomment %}
+
+                  <td align="center">
+                      <a href=""> Ver Dados </a>
+                  </td>
+                  <td align="center">
+                      <a href=""> Ver Frequência </a>
+                  </td>
+                </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
       </div>
     </div>
-
   </div>
 </div>
+
+<script type="text/javascript">
+  document.getElementById("search").addEventListener("change", filter_members);
+  var members = "{{members_json}}";
+  
+
+  function filter_members(input) {
+    if(input) {
+      var value = input.target.value;
+      var membersJSON = JSON.parse(members.replace(/&#39;/g,'"'));
+
+      var filtered_members = membersJSON.filter(member => {
+          return standardizeText(member.name)
+                        .includes(standardizeText(value))
+        });
+
+      console.log(filtered_members)
+    }
+  } 
+
+  function standardizeText (text)
+  {       
+      text = text.toLowerCase();                                                         
+      text = text.replace(new RegExp('[ÁÀÂÃ]','gi'), 'a');
+      text = text.replace(new RegExp('[ÉÈÊ]','gi'), 'e');
+      text = text.replace(new RegExp('[ÍÌÎ]','gi'), 'i');
+      text = text.replace(new RegExp('[ÓÒÔÕ]','gi'), 'o');
+      text = text.replace(new RegExp('[ÚÙÛ]','gi'), 'u');
+      text = text.replace(new RegExp('[Ç]','gi'), 'c');
+      return text;                 
+  }
+</script>
 {% endblock %}

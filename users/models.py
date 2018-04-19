@@ -76,7 +76,7 @@ class DefaultUser(Account):
     rg = models.CharField('RG', max_length=20, blank=False)
     date_birth = models.DateField('Data de Nascimento', blank=False)
     phone_number = models.CharField('Número de Telefone', max_length=15, blank=False)
-    picture = models.ImageField('Foto de Perfil', upload_to='images/', default='images/default.svg')
+    picture = models.ImageField('Foto de Perfil', upload_to='images/users/', default='images/users/default.png')
 
     class Meta:
         verbose_name = 'Usuário Base'
@@ -101,6 +101,15 @@ class Member(DefaultUser):
     class Meta:
         verbose_name = 'Membro'
         verbose_name_plural = 'Membros'
+
+    def get_json(self):
+        return {
+            'enrollment': self.enrollment, 
+            'email': self.email,
+            'name': self.first_name + self.last_name,
+            'course': self.course,
+            'college_enrollment': self.college_enrollment,
+        }
 
 
 class Parent(models.Model):
