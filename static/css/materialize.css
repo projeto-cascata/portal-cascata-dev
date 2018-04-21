@@ -2726,6 +2726,10 @@ video.responsive-video {
   height: auto;
 }
 
+img.responsive-img.profile {
+  height: 300px;
+  width: 300px;
+}
 .pagination li {
   display: inline-block;
   border-radius: 2px;
@@ -4498,6 +4502,10 @@ nav .input-field label.active i {
   }
 }
 
+div.form {
+  line-height: 0.3cm;
+}
+
 a {
   text-decoration: none;
 }
@@ -4534,6 +4542,14 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   font-weight: inherit;
+}
+
+p.h3 {
+  font-size: 18px;
+}
+
+p.h2 {
+  font-size: 24px;
 }
 
 h1 {
