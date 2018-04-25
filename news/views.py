@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import get_user
 from users.models import DefaultUser
 from django.http import HttpResponse
+from django.contrib.auth.decorators import permission_required
 
 from .forms import NewsForm
 
@@ -10,7 +11,7 @@ from .forms import NewsForm
 def index(request):
     return HttpResponse('<h1> News Index </h1>')
 
-
+@permission_required('news.add_newsitem', login_url='/news/index/')
 def create_news(request):
     if request.method == 'GET':
         form = NewsForm()
