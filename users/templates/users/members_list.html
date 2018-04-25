@@ -29,8 +29,12 @@
     <div class="panel panel-default user_panel">
       <div class="panel-heading">
         <h3 class="panel-title"> Lista de Membros </h3>
-        <input id="search" type="text" onchange="filter_members()"
-          placeholder="Procurar.." style="width: 30%;margin-top: 20;">
+        <div>
+          <form method="get" id="searchForm">
+            {{ filter.form.as_p }}
+            <button id="search">Buscar</button>
+          </form>
+        </div>
       </div>
       <div class="panel-body">
         <div class="table-container">
@@ -68,7 +72,7 @@
               </tr>
             </thead>
             <tbody>
-              {% for member in members %}
+              {% for member in filter.qs %}
                 <tr>
                   <td width="10">
                     <img class="profile-picture" src=../../media/{{member.picture}} height="60" width="60">
@@ -120,35 +124,28 @@
   </div>
 </div>
 
+<script src="http://code.jquery.com/jquery-3.3.1.js"
+			  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+			  crossorigin="anonymous"></script>
+
 <script type="text/javascript">
-  document.getElementById("search").addEventListener("change", filter_members);
-  var members = "{{members_json}}";
-  
+  $(document).ready(function(){
+    // Filtering members
+    document.getElementById("search").addEventListener("click", filter_members);
 
-  function filter_members(input) {
-    if(input) {
-      var value = input.target.value;
-      var membersJSON = JSON.parse(members.replace(/&#39;/g,'"'));
-
-      var filtered_members = membersJSON.filter(member => {
-          return standardizeText(member.name)
-                        .includes(standardizeText(value))
-        });
-
-      console.log(filtered_members)
-    }
-  } 
-
-  function standardizeText (text)
-  {       
-      text = text.toLowerCase();                                                         
-      text = text.replace(new RegExp('[ÁÀÂÃ]','gi'), 'a');
-      text = text.replace(new RegExp('[ÉÈÊ]','gi'), 'e');
-      text = text.replace(new RegExp('[ÍÌÎ]','gi'), 'i');
-      text = text.replace(new RegExp('[ÓÒÔÕ]','gi'), 'o');
-      text = text.replace(new RegExp('[ÚÙÛ]','gi'), 'u');
-      text = text.replace(new RegExp('[Ç]','gi'), 'c');
-      return text;                 
-  }
+    function filter_members(event){
+      event.preventDefault();
+      $.ajax({
+        url: "/users/members_list/?first_name=" + $("#id_first_name").val() + "&last_name=" + $("#id_last_name").val(),
+        type: "get",
+        success: function (response) {
+          $('#body').html(response);
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      });
+    } 
+  });
 </script>
 {% endblock %}
