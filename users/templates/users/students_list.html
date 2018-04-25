@@ -1,0 +1,142 @@
+<style>
+        .profile-picture { 
+          border-radius: 50%; 
+          margin-right: 20px;
+        }
+    
+        #search {
+          float: right;
+          width: 30%;
+        }
+    
+        .panel-heading {
+          display: inline-block;
+          width: 100%;
+        }
+    
+        .panel-title {
+          display: inline-block;
+        }
+    
+    </style>
+    
+    
+    {% extends 'base.html' %}
+    {% block content %}
+    
+    <div class="container">
+      <div class="row">
+        <div class="panel panel-default user_panel">
+          <div class="panel-heading">
+            <h3 class="panel-title"> Lista de Membros </h3>
+            <div>
+              <form method="get" id="searchForm">
+                {{ filter.form.as_p }}
+                <button id="search">Buscar</button>
+              </form>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="table-container">
+              <table class="table-users table" border="0">
+                <thead>
+                  <tr>
+                    <th>
+                    </th>
+                    <th>
+                      <span>Nome</span>
+                    </th>
+                    <th>
+                      <span>Email</span>
+                    </th>
+                    <th>
+                      <span>Responsável</span>
+                    </th>
+    
+                    {% comment %}
+                    <th class="text-center">
+                      <span>Status</span>
+                    </th>
+                    <th class="text-center">
+                      <span>Último</span> <br>
+                      <span>acesso</span>
+                    </th>
+                    {% endcomment %}
+    
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for student in filter.qs %}
+                    <tr>
+                      <td width="10">
+                        <img class="profile-picture" src=../../media/{{student.picture}} height="60" width="60">
+                      </td>
+                      <td>
+                        {{student.first_name}} {{student.last_name}}
+                      </td>
+                      <td>
+                        <i class="fa fa-envelope"></i>
+                        <a href="#">{{student.email}}</a>
+                      </td>
+    
+                      {% comment %}
+                      <td align="center">
+                        {% if student.is_active %} Ativo
+                        {% else %} Desativado
+                        {% endif %}
+                      </td>
+                      <td align="center">
+                        {% if student.last_login == None %} Nunca
+                        {% else %} {{student.last_login}}
+                        {% endif %}
+                        <br>
+                        <small class="text-muted">
+                            Ontem
+                        </small>
+                      </td>
+                      {% endcomment %}
+    
+                      <td align="center">
+                          <a href=""> Ver Dados </a>
+                      </td>
+                      <td align="center">
+                          <a href=""> Ver Frequência </a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="http://code.jquery.com/jquery-3.3.1.js"
+                  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+                  crossorigin="anonymous"></script>
+    
+    <script type="text/javascript">
+      $(document).ready(function(){
+        // Filtering students
+        document.getElementById("search").addEventListener("click", filter_students);
+    
+        function filter_students(event){
+          event.preventDefault();
+          $.ajax({
+            url: "/users/students_list/?first_name=" + $("#id_first_name").val() + "&last_name=" + $("#id_last_name").val(),
+            type: "get",
+            success: function (response) {
+              $('#body').html(response);
+            },
+            error: function (error) {
+              console.log(error)
+            }
+          });
+        } 
+      });
+    </script>
+    {% endblock %}

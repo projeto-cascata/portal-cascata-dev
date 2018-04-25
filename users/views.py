@@ -4,6 +4,7 @@ from django.template import loader
 import json
 from django.core import serializers
 from .models import Member
+from .models import Student
 from .filters import MemberFilter
 
 def index(request):
@@ -20,3 +21,8 @@ def members_list(request):
     members = Member.objects.all()
     member_filter = MemberFilter(request.GET, queryset=members)
     return render(request, 'users/members_list.html', { 'members': members, 'filter': member_filter})
+    
+def students_list(request):
+    students = Student.objects.all()
+    student_filter = StudentFilter(request.GET, queryset=students)
+    return render(request, 'users/students_list.html', { 'students': students, 'filter': student_filter})
