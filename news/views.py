@@ -30,5 +30,5 @@ def create_news(request):
             post.posted_by = default_user
             post.save()
             return HttpResponseRedirect('/news/index/')
-        else:
-            pass
+    else:
+        return HttpResponse('Unauthorized', status=401)
