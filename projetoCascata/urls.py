@@ -25,6 +25,7 @@ urlpatterns = [
     path(r'jet/', include('jet.urls', 'jet')),
     path('news/', include('news.urls')),
     path('admin/', admin.site.urls),
+    path('tinymce/', include('tinymce.urls'))
 ]
 
 if settings.DEBUG:
