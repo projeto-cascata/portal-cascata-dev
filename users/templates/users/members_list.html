@@ -1,25 +1,61 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
     .profile-picture { 
       border-radius: 50%; 
       margin-right: 20px;
     }
 
-    #search {
-      float: right;
-      width: 30%;
-    }
-
     .panel-heading {
-      display: inline-block;
+      display: inline-flex;
       width: 100%;
     }
 
     .panel-title {
-      display: inline-block;
+      display: inline;
     }
 
-</style>
+    .div {
+      position: absolute;
+      right: 20px;
+      width: 420px;
+      padding: 5px;
+      margin-top: 15;
+      margin-right: 20;
+    }
 
+    .div form {
+      display: inline-flex;
+    }
+    
+    .div form p {
+      padding-right: 10px;
+    }
+
+    .div button {
+      margin-top: 30;
+      height: 30px;
+      background-color: white;
+      border: 1px solid lightgray;
+      border-radius: 10px;
+      -webkit-transition-duration: 0.4s;
+      transition-duration: 0.4s;
+    }
+
+    .div button:hover {
+      margin-top: 30;
+      height: 30px;
+      background-color: white;
+      border: 1px solid lightgray;
+      border-radius: 10px;
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .panel-body {
+      align-self: center;
+      margin-top: 40px;
+    }
+</style>
 
 {% extends 'base.html' %}
 {% block content %}
@@ -29,10 +65,10 @@
     <div class="panel panel-default user_panel">
       <div class="panel-heading">
         <h3 class="panel-title"> Lista de Membros </h3>
-        <div>
+        <div class="div">
           <form method="get" id="searchForm">
             {{ filter.form.as_p }}
-            <button id="search">Buscar</button>
+            <button id="search" class="icon"><i class="fa fa-search"></i></button>
           </form>
         </div>
       </div>

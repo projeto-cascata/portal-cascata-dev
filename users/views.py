@@ -6,6 +6,7 @@ from django.core import serializers
 from .models import Member
 from .models import Student
 from .filters import MemberFilter
+from .filters import StudentFilter
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
