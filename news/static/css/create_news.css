@@ -1,0 +1,28 @@
+.checkbox-group {
+    display: inline-block;
+    padding: 10px;
+}
+
+div.checkbox-group label {
+    /* margin-right: 20px; */
+    font-size: 1.1rem;
+}
+
+.label-text{
+    font-size: 1.5em;
+}
+
+.input-field.form-title{
+    margin-top: 20px;
+    margin-bottom: 35px;
+    width: 80%;
+}
+
+.input-field.form-title label{
+    font-size: 1.5rem;
+
+}
+
+.form-visible{
+    margin-top: 35px;
+}

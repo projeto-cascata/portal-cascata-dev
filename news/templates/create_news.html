@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block styles %}
+    <link href="{% static 'css/create_news.css' %}" rel="stylesheet" > 
+{% endblock %}
+
+
+{% block content %}
+<head>
+    {{ form.media }}
+</head>
+<body>
+    <div class="container">
+
+        <form action="/news/create_news/" method="post">
+        {% csrf_token %}
+            
+            <div class="input-field form-title">
+                <label for="{{form.title.id_for_label}}" class="label-text">Título</label>
+                {{form.title}}
+            </div>
+
+            {{form.body}}
+
+            <div class="form-visible">
+                <label for="{{form.visible_to.id_for_label}}" class="label-text">Visível para</label>
+            </div>
+        
+            {% for pk, choice in form.visible_to.field.widget.choices %}
+                <div class="checkbox-group">
+                    <p>
+                        <label for="id_{{form.visible_to.name}}_{{forloop.counter0}}">
+                            <input 
+                                id="id_{{form.visible_to.name}}_{{forloop.counter0}}"
+                                type="checkbox" 
+                                name="{{form.visible_to.name}}"
+                                value="{{pk}}"/>
+                            <span> {{choice}}</span>
+                        </label>
+                    </p>    
+        
+                </div>
+            {% endfor %}
+    
+            <div>
+                <button class="btn waves-effect waves-light" type="submit" name="action">Enviar
+                    <i class="material-icons right">send</i>
+                  </button>
+            </div>
+
+        </form>
+    </div>
+</body>
+{% endblock %}
