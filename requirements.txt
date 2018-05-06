@@ -5,3 +5,4 @@ Pillow
 psycopg2
 moment==0.8.2
 django-filter
+django-tinymce4-lite
