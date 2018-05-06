@@ -56,7 +56,7 @@
       margin-top: 40px;
     }
 </style>
-
+    
 {% extends 'base.html' %}
 {% block content %}
 
@@ -64,7 +64,7 @@
   <div class="row">
     <div class="panel panel-default user_panel">
       <div class="panel-heading">
-        <h3 class="panel-title"> Lista de Membros </h3>
+        <h3 class="panel-title"> Lista de Alunos </h3>
         <div class="div">
           <form method="get" id="searchForm">
             {{ filter.form.as_p }}
@@ -73,8 +73,8 @@
         </div>
       </div>
       <div class="panel-body">
-        <div class="table-container">
-          <table class="table-users table" border="0">
+        <div>
+          <table>
             <thead>
               <tr>
                 <th>
@@ -85,11 +85,8 @@
                 <th>
                   <span>Email</span>
                 </th>
-                <th class="text-center">
-                    <span> Setor </span>
-                  </th>
-                <th class="text-center">
-                  <span> Cargo </span>
+                <th>
+                  <span>Responsável</span>
                 </th>
 
                 {% comment %}
@@ -108,34 +105,30 @@
               </tr>
             </thead>
             <tbody>
-              {% for member in filter.qs %}
+              {% for student in filter.qs %}
                 <tr>
                   <td width="10">
-                    <img class="profile-picture" src=../../media/{{member.picture}} height="60" width="60">
+                    <img class="profile-picture" src=../../media/{{student.picture}} height="60" width="60">
                   </td>
                   <td>
-                    {{member.first_name}} {{member.last_name}}
+                    {{student.first_name}} {{student.last_name}}
                   </td>
                   <td>
                     <i class="fa fa-envelope"></i>
-                    <a href="#">{{member.email}}</a>
+                    <a href="#">{{student.email}}</a>
                   </td>
-                  <td align="center">
-                      Pedagodia
+                  <td>
+                      {{student.parent.first_name}} {{student.parent.last_name}}
                   </td>
-                  <td align="center">
-                    Professor
-                  </td>
-
                   {% comment %}
                   <td align="center">
-                    {% if member.is_active %} Ativo
+                    {% if student.is_active %} Ativo
                     {% else %} Desativado
                     {% endif %}
                   </td>
                   <td align="center">
-                    {% if member.last_login == None %} Nunca
-                    {% else %} {{member.last_login}}
+                    {% if student.last_login == None %} Nunca
+                    {% else %} {{student.last_login}}
                     {% endif %}
                     <br>
                     <small class="text-muted">
@@ -161,18 +154,18 @@
 </div>
 
 <script src="http://code.jquery.com/jquery-3.3.1.js"
-			  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-			  crossorigin="anonymous"></script>
+              integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+              crossorigin="anonymous"></script>
 
 <script type="text/javascript">
   $(document).ready(function(){
-    // Filtering members
-    document.getElementById("search").addEventListener("click", filter_members);
+    // Filtering students
+    document.getElementById("search").addEventListener("click", filter_students);
 
-    function filter_members(event){
+    function filter_students(event){
       event.preventDefault();
       $.ajax({
-        url: "/users/members_list/?first_name=" + $("#id_first_name").val() + "&last_name=" + $("#id_last_name").val(),
+        url: "/users/students_list/?first_name=" + $("#id_first_name").val() + "&last_name=" + $("#id_last_name").val(),
         type: "get",
         success: function (response) {
           $('#body').html(response);
