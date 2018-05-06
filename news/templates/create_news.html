@@ -12,6 +12,7 @@
 </head>
 <body>
     <div class="container">
+
         <form action="/news/create_news/" method="post">
         {% csrf_token %}
             
@@ -23,20 +24,24 @@
             {{form.body}}
 
             <div class="form-visible">
-                <label for="{{form.title.id_for_label}}" class="label-text">Visivel para</label>
+                <label for="{{form.visible_to.id_for_label}}" class="label-text">Visível para</label>
             </div>
         
-                {% for group in form.visible_to %}
-                    <div class="checkbox-group">
-                        <p>
-                            <label>
-                                <input type="checkbox" />
-                                <span> {{group}}</span>
-                            </label>
-                        </p>    
-            
-                    </div>
-                {% endfor %}
+            {% for pk, choice in form.visible_to.field.widget.choices %}
+                <div class="checkbox-group">
+                    <p>
+                        <label for="id_{{form.visible_to.name}}_{{forloop.counter0}}">
+                            <input 
+                                id="id_{{form.visible_to.name}}_{{forloop.counter0}}"
+                                type="checkbox" 
+                                name="{{form.visible_to.name}}"
+                                value="{{pk}}"/>
+                            <span> {{choice}}</span>
+                        </label>
+                    </p>    
+        
+                </div>
+            {% endfor %}
     
             <div>
                 <button class="btn waves-effect waves-light" type="submit" name="action">Enviar

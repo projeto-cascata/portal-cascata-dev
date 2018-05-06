@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth import get_user
-from users.models import DefaultUser
+from users.models import Member
 from django.http import HttpResponse
 from django.contrib.auth.decorators import permission_required
 
@@ -16,19 +16,22 @@ def create_news(request):
     if request.method == 'GET':
         form = NewsForm()
         context = {'form': form}
-
+        print(form.data)
         return render(request, 'create_news.html', context) 
     
     elif request.method == 'POST' and request.user.is_authenticated:
         form = NewsForm(request.POST)
 
+        print(request.POST)
+        print(form.data)
+
         if form.is_valid():
             post = form.save(commit=False)
             
-            user = get_user(request)
-            default_user = DefaultUser.objects.get(email = user.email)
+            logged_user = get_user(request)
+            member_account = Member.objects.get(email = logged_user.email)
 
-            post.posted_by = default_user
+            post.posted_by = member_account
             post.save()
             return HttpResponseRedirect('/news/index/')
     else:
