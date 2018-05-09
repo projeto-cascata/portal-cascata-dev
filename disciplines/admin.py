@@ -1,3 +1,26 @@
 from django.contrib import admin
+from .models import Discipline, DisciplineFront
 
-# Register your models here.
+
+class DisciplineFrontInline(admin.StackedInline):
+    model = DisciplineFront
+
+    fk_name = 'containing_discipline'
+    
+    fields = (
+        'name',
+    )
+
+@admin.register(Discipline)
+class DisciplineAdmin(admin.ModelAdmin):
+    fieldsets = (
+        'Disciplina', {
+            'fields': (
+                'name',
+            ),
+        },
+    ),
+
+    inlines = [
+        DisciplineFrontInline,
+    ]

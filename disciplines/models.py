@@ -3,7 +3,10 @@ from django.db import models
 # Create your models here.
 
 class DisciplineComponent(models.Model):
-    name = models.CharField(max_length=50, blank=False)
+    name = models.CharField('Nome', max_length=50, blank=False)
+
+    def __str__(self):
+        return self.name
 
 class Discipline(DisciplineComponent):
     class Meta:
@@ -11,6 +14,9 @@ class Discipline(DisciplineComponent):
 
 class DisciplineFront(DisciplineComponent):
     containing_discipline = models.ForeignKey(to=Discipline, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Frente"
 
 class Material(models.Model):
     name = models.CharField(max_length=200, blank=False)
