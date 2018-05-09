@@ -17,6 +17,7 @@ class DisciplineAdmin(admin.ModelAdmin):
         'Disciplina', {
             'fields': (
                 'name',
+                'cover',
             ),
         },
     ),

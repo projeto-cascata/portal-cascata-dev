@@ -9,6 +9,10 @@ class DisciplineComponent(models.Model):
         return self.name
 
 class Discipline(DisciplineComponent):
+    cover = models.ImageField('Foto de Capa', 
+                                upload_to='images/disciplineCover/', 
+                                default='images/disciplineCover/default.png')
+
     class Meta:
         verbose_name = 'Disciplina'
 
