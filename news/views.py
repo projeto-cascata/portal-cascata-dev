@@ -2,6 +2,7 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth import get_user
 from users.models import Member
+from news.models import NewsItem
 from django.http import HttpResponse
 from django.contrib.auth.decorators import permission_required
 from django.views.generic.list import ListView
@@ -43,7 +44,6 @@ def create_news(request):
     else:
         return HttpResponse('Unauthorized', status=401)
 
-
 class NewsList(ListView):
     model = NewsItem
 
@@ -55,3 +55,10 @@ class NewsList(ListView):
         context = super().get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
+        
+def news_detail(request):
+    news = NewsItem.objects.all()
+    context = {
+        'news': news,
+    }
+    return render(request, 'news_detail.html', context)
