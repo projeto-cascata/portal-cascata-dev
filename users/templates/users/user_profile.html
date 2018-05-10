@@ -9,9 +9,14 @@
             </div>
         
             <div class="col s6">
-                <br>
                 <img alt="User Pic" src="{{ user.picture.url }}"
                 class="circle responsive-img profile">
+            <br><br>
+            <div class="center">
+                <a class="waves-effect waves-light btn">Informações de Frequência</a>
+                <a class="waves-effect waves-light btn">Justificativas Submetidas</a>
+            <br><br>
+            </div>
             </div>
 
             <div class="col s6">
@@ -39,7 +44,7 @@
                         <div class="col s6">
                             <div class="form">
                                 <p class="h3">Setor</p>
-                                <p class="h5">Setor do Usuário</p>
+                                <p class="h5">{{ user.course }}</p>
                             </div>
                             <div class="form">
                                 <p class="h3">Cargo</p>
@@ -48,13 +53,15 @@
                         </div>
                         {% else %}
                         <div class="col s6">
+                                <p class="h2"><b>Dados do Responsável</b></p>
                                 <div class="form">
-                                    <p class="h3">Aluno Info</p>
-                                    <p class="h5">Informação</p>
+                                    <p class="h3">Nome Completo</p>
+                                    <p class="h5">{{ user.parent.first_name }} {{ user.parent.last_name }}</p>
                                 </div>
                                 <div class="form">
-                                    <p class="h3">Aluno Info</p>
-                                    <p class="h5">Informação</p>
+                                    <p class="h3">Email</p>
+                                    <p class="h5">{{ user.parent.email }}</p>
+                                </div>
                                 </div>
                         </div>
                         {% endif %}                        

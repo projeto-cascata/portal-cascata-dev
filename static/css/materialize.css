@@ -2729,6 +2729,9 @@ video.responsive-video {
 img.responsive-img.profile {
   height: 300px;
   width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
 }
 .pagination li {
   display: inline-block;
@@ -5672,6 +5675,9 @@ button.btn-floating {
   z-index: 1;
   -webkit-transition: .3s ease-out;
   transition: .3s ease-out;
+  margin-top: 15px;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .waves-effect .waves-ripple {
