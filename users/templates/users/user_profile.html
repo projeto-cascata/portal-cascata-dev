@@ -17,7 +17,7 @@
             <div class="col s6">
                     <div class="row">
                         <p class="h2"><b>Dados do Usuário</b></p>
-                        <div>
+                        <div class="col s6">
                             <div class="form">
                                 <p class="h3">Nome Completo</p>
                                 <p class="h5">{{ user.get_full_name }}</p>
@@ -35,6 +35,29 @@
                                 <p class="h5">{{ user.phone_number }}</p>
                             </div>       
                         </div>
+                        {% if user.is_member %}
+                        <div class="col s6">
+                            <div class="form">
+                                <p class="h3">Setor</p>
+                                <p class="h5">Setor do Usuário</p>
+                            </div>
+                            <div class="form">
+                                <p class="h3">Cargo</p>
+                                <p class="h5">Cargo do Usuário</p>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="col s6">
+                                <div class="form">
+                                    <p class="h3">Aluno Info</p>
+                                    <p class="h5">Informação</p>
+                                </div>
+                                <div class="form">
+                                    <p class="h3">Aluno Info</p>
+                                    <p class="h5">Informação</p>
+                                </div>
+                        </div>
+                        {% endif %}                        
                     </div>
             </div>
         </div>
