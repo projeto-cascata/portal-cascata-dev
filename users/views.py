@@ -6,14 +6,23 @@ from django.views.generic import ListView
 from django.core import serializers
 from .models import Member
 from .models import Student
+from .models import DefaultUser
 from .filters import MemberFilter
 from .filters import StudentFilter
+from django.core.exceptions import ObjectDoesNotExist
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
 
 def profile(request, user_id):
-    user = Member.objects.get(enrollment=user_id)
+
+    user = None
+    #user = Student.objects.get(enrollment=user_id)
+    #user = Member.objects.get(enrollment=user_id)
+    try:
+        user = Member.objects.get(enrollment=user_id)
+    except ObjectDoesNotExist:
+        user = Student.objects.get(enrollment=user_id)        
     context = {
         'user': user,
     }

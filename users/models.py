@@ -49,7 +49,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField('Nome', max_length=40, blank=False)
     last_name = models.CharField('Sobrenome', max_length=80, blank=False)
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=True)
 
     objects = AccountManager()
 
@@ -87,6 +87,7 @@ class DefaultUser(Account):
 
 
 class Student(DefaultUser):
+    is_member = models.BooleanField(default=False)
     class Meta:
         verbose_name = 'Aluno'
         verbose_name_plural = 'Alunos'
@@ -97,6 +98,7 @@ class Member(DefaultUser):
     course = models.CharField('Curso', max_length=20)
     semester = models.CharField('Semestre', max_length=20)
     college_enrollment = models.CharField('Matricula', max_length=10)
+    is_member = models.BooleanField(default=True)    
 
     class Meta:
         verbose_name = 'Membro'

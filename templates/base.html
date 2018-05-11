@@ -2,33 +2,59 @@
 <!DOCTYPE html>
   <html>
     <head>
-        <!--Import Google Icon Font-->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.css' %}"  media="screen,projection"/>
-        {% block styles %}
-        {% endblock %}
-        <!--Let browser know website is optimized for mobile-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.css' %}"  media="screen,projection"/>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+      {% block styles %}
+      {% endblock %}
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
 
-    <body id="body">
-
-        <nav>
-            <div class="nav-wrapper">
-                <img src="{% static 'images/Logo_Branco.png' %}" class="brand-logo"></img>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="">Início</a></li>
-                    <li><a href="">Conteúdos</a></li>
-                    <li><a href="">Membros</a></li>
-                    <li><a href="">Alunos</a></li>
-                </ul>
+    <nav>
+        <div class="nav-wrapper">
+            <img src="{% static 'images/Logo_Branco.png' %}" class="brand-logo"></img>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="">Início</a></li>
+                <li><a href="">Conteúdos</a></li>
+                <li><a href="">Membros</a></li>
+                <li><a href="">Alunos</a></li>
+            </ul>
             </div>
         </nav>
-
+        
         <!--JavaScript at end of body for optimized loading-->
         <script type="text/javascript" src="{% static 'js/materialize.js' %}"></script>
+    <main>s
         {% block content %}
         {% endblock %}
+    </main>
+
+        <footer class="page-footer">
+                <div class="container">
+                  <div class="row">
+                    <div class="col l6 s12">
+                      <h5 class="white-text">Projeto Cascata</h5>
+                      <p class="grey-text text-lighten-4">O Projeto Cascata nasceu da vontade de fazer o bem.</p>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                      <h5 class="white-text">Contato</h5>
+                      <ul>
+                        <i class ="font-awesome-icons fab fa-facebook-square fa-2x"></i>
+                        <i class ="fab fa-instagram fa-2x"></i>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-copyright">
+                  <div class="container">
+                  © 2018 Projeto Cascata
+                  </div>
+                </div>
+        </footer>
+
     </body>
   </html>
