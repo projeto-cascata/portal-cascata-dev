@@ -22,6 +22,9 @@
                     <li><a href="">Conteúdos</a></li>
                     <li><a href="{% url 'members_list' %}">Membros</a></li>
                     <li><a href="{% url 'students_list' %}">Alunos</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">Sair</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>

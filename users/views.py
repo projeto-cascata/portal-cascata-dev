@@ -1,10 +1,12 @@
 import json
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.views.generic import ListView
 from django.core.exceptions import ObjectDoesNotExist
 from django.core import serializers
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from .models import Member
 from .models import Student
 from .models import DefaultUser
@@ -14,6 +16,10 @@ from django.core.exceptions import ObjectDoesNotExist
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/users/login')
 
 def profile(request, user_id):
 
@@ -29,6 +35,7 @@ def profile(request, user_id):
     }
     return render(request, 'users/user_profile.html', context)
 
+@login_required
 def own_profile(request):
     user = request.user
     try:
@@ -41,7 +48,6 @@ def own_profile(request):
     }
     return render(request, 'users/user_profile.html', context)
 
-
 class MembersList(ListView):
     model = Member
     context_object_name = 'members'
@@ -52,7 +58,6 @@ class MembersList(ListView):
         members = Member.objects.all()
         context['filter'] = MemberFilter(self.request.GET, queryset=members)
         return context
-
 
 class StudentsList(ListView):
     model = Student
