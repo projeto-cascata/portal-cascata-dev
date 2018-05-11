@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+<style>
+    .container {
+        position: relative;
+    }
+
+    .bottom-right {
+        position: absolute;
+        bottom: 8px;
+        right: -100px;
+        background-color: rgba(255,255,255,0.5);
+        color: Black;
+        padding: 5px 10px;
+        font-size: 20px;
+        font-weight: bolder;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+      <div class="panel panel-default user_panel">
+        <div class="panel-heading">
+          <h3 class="panel-title"> Materiais </h3>
+        </div>
+        <div class="panel-body">
+            {% for discipline in object_list %}
+                <div class="container">
+                    <a href="{{discipline.id}}">
+                        <img class="discipline-cover" src=../../media/{{discipline.cover}} height="200" width="800">
+                         <div class="bottom-right"> {{ discipline.name }} </div>
+                    </a>
+                </div>
+                
+            {% empty %}
+                <p> Não há disciplinas cadastradas!</p>
+            {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}
