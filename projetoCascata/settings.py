@@ -141,7 +141,7 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-LOGIN_REDIRECT_URL = '/users/profile/180000'
+LOGIN_REDIRECT_URL = '/users/profile/home'
 
 TINYMCE_DEFAULT_CONFIG = {
     'height': 360,

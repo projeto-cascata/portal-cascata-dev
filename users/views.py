@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django.views.generic import ListView
+from django.core.exceptions import ObjectDoesNotExist
 from django.core import serializers
 from .models import Member
 from .models import Student
@@ -25,6 +26,18 @@ def profile(request, user_id):
         user = Student.objects.get(enrollment=user_id)        
     context = {
         'user': user,
+    }
+    return render(request, 'users/user_profile.html', context)
+
+def own_profile(request):
+    user = request.user
+    try:
+        user = Member.objects.get(email=user.email)
+    except ObjectDoesNotExist:
+        user = Student.objects.get(email=user.email)
+
+    context = {
+        'user': user
     }
     return render(request, 'users/user_profile.html', context)
 

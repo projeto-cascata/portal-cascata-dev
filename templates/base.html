@@ -14,15 +14,15 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
 
-    <nav>
-        <div class="nav-wrapper">
-            <img src="{% static 'images/Logo_Branco.png' %}" class="brand-logo"></img>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="">Início</a></li>
-                <li><a href="">Conteúdos</a></li>
-                <li><a href="">Membros</a></li>
-                <li><a href="">Alunos</a></li>
-            </ul>
+        <nav>
+            <div class="nav-wrapper">
+                <img src="{% static 'images/Logo_Branco.png' %}" class="brand-logo"></img>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="{% url 'profile-redirect' %}">Início</a></li>
+                    <li><a href="">Conteúdos</a></li>
+                    <li><a href="{% url 'members_list' %}">Membros</a></li>
+                    <li><a href="{% url 'students_list' %}">Alunos</a></li>
+                </ul>
             </div>
         </nav>
         
