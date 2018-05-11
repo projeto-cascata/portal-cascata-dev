@@ -16,3 +16,13 @@
 body {
     background-color: #fafafa;
 }
+
+.profile-container {
+    margin: 0 auto;
+    width: 85%;
+}
+
+.h3, .h5 {
+    margin-left: 10px;
+}
+

@@ -1,71 +1,89 @@
 {% extends 'base.html' %}
-{% block content %}
 
+{% load staticfiles %}
+
+{% block styles %}
+    <link href="{% static 'css/user_profile.css' %}" rel="stylesheet" > 
+{% endblock %}
+
+{% block content %}
 <body>
-    <div class="container">
+    <div class="profile-container">
         <div class="row">
             <div class="col s12">
                 <h1 class="display-5">Perfil de Usuário - {{ user.first_name }}</h1>
             </div>
-        
+        </div>
+        <div class="row">
             <div class="col s6">
                 <img alt="User Pic" src="{{ user.picture.url }}"
                 class="circle responsive-img profile">
-            <br><br>
-            <div class="center">
-                <a class="waves-effect waves-light btn">Informações de Frequência</a>
-                <a class="waves-effect waves-light btn">Justificativas Submetidas</a>
-            <br><br>
-            </div>
+                <br>
+                <div class="row center">
+                    <div class="col s12">
+                        <a class="waves-effect waves-light btn">Informações de Frequência</a>
+                    </div>
+                    <div class="col s12">                    
+                        <a class="waves-effect waves-light btn">Justificativas Submetidas</a>
+                    </div>                    
+                    <br><br>
+                </div>
             </div>
 
             <div class="col s6">
-                    <div class="row">
-                        <p class="h2"><b>Dados do Usuário</b></p>
-                        <div class="col s6">
-                            <div class="form">
-                                <p class="h3">Nome Completo</p>
-                                <p class="h5">{{ user.get_full_name }}</p>
-                            </div>
-                            <div class="form">
-                                <p class="h3">E-mail</p>
-                                <p class="h5">{{ user.email }}</p> 
-                            </div>
-                            <div class="form">
-                                <p class="h3">Matrícula</p>
-                                <p class="h5">{{ user.enrollment }}</p> 
-                            </div>
-                            <div class="form">
-                                <p class="h3">Telefone</p>        
-                                <p class="h5">{{ user.phone_number }}</p>
-                            </div>       
-                        </div>
-                        {% if user.is_member %}
-                        <div class="col s6">
-                            <div class="form">
-                                <p class="h3">Setor</p>
-                                <p class="h5">{{ user.course }}</p>
-                            </div>
-                            <div class="form">
-                                <p class="h3">Cargo</p>
-                                <p class="h5">Cargo do Usuário</p>
-                            </div>
-                        </div>
-                        {% else %}
-                        <div class="col s6">
-                                <p class="h2"><b>Dados do Responsável</b></p>
-                                <div class="form">
-                                    <p class="h3">Nome Completo</p>
-                                    <p class="h5">{{ user.parent.first_name }} {{ user.parent.last_name }}</p>
-                                </div>
-                                <div class="form">
-                                    <p class="h3">Email</p>
-                                    <p class="h5">{{ user.parent.email }}</p>
-                                </div>
-                                </div>
-                        </div>
-                        {% endif %}                        
+                <div class="row">
+                    <div class="col s6">
+                        <h5><b>Dados do Usuário</b></h4>
                     </div>
+                    {% if not user.is_member %}
+                    <div class="col s6">
+                        <h5><b>Dados do Responsável</b></h5>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        <div class="form">
+                            <p class="h3">Nome Completo</p>
+                            <p class="h5">{{ user.get_full_name }}</p>
+                        </div>
+                        <div class="form">
+                            <p class="h3">E-mail</p>
+                            <p class="h5">{{ user.email }}</p> 
+                        </div>
+                        <div class="form">
+                            <p class="h3">Matrícula</p>
+                            <p class="h5">{{ user.enrollment }}</p> 
+                        </div>
+                        <div class="form">
+                            <p class="h3">Telefone</p>        
+                            <p class="h5">{{ user.phone_number }}</p>
+                        </div>       
+                    </div>
+                    {% if user.is_member %}
+                    <div class="col s6">
+                        <div class="form">
+                            <p class="h3">Setor</p>
+                            <p class="h5">{{ user.course }}</p>
+                        </div>
+                        <div class="form">
+                            <p class="h3">Cargo</p>
+                            <p class="h5">Cargo do Usuário</p>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="col s6">
+                        <div class="form">
+                            <p class="h3">Nome Completo</p>
+                            <p class="h5">{{ user.parent.first_name }} {{ user.parent.last_name }}</p>
+                        </div>
+                        <div class="form">
+                            <p class="h3">Email</p>
+                            <p class="h5">{{ user.parent.email }}</p>
+                        </div>
+                    </div>
+                    {% endif %}                        
+                </div>
             </div>
         </div>
     </div>
