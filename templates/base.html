@@ -19,7 +19,7 @@
                 <img src="{% static 'images/Logo_Branco.png' %}" class="brand-logo"></img>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="{% url 'profile-redirect' %}">Início</a></li>
-                    <li><a href="">Conteúdos</a></li>
+                    <li><a href="{% url 'disciplines' %}">Conteúdos</a></li>
                     <li><a href="{% url 'members_list' %}">Membros</a></li>
                     <li><a href="{% url 'students_list' %}">Alunos</a></li>
                     {% if request.user.is_authenticated %}
@@ -31,7 +31,7 @@
         
         <!--JavaScript at end of body for optimized loading-->
         <script type="text/javascript" src="{% static 'js/materialize.js' %}"></script>
-    <main>s
+    <main>
         {% block content %}
         {% endblock %}
     </main>
