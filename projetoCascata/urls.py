@@ -24,8 +24,9 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path(r'^jet/', include('jet.urls', 'jet')),
     path('admin/', admin.site.urls),
+    path(r'^invitations/', include('invitations.urls', namespace='invitations')),
+
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

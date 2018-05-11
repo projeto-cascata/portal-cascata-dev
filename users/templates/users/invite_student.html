@@ -1,0 +1,6 @@
+<h1> Convide um estudante </h1>
+
+<form action="invite_students/" method="POST">{% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Submit</button>
+</form>

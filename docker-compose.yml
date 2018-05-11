@@ -6,6 +6,7 @@ services:
     environment:
       POSTGRES_DB: cascata-db
   web:
+    dns: 8.8.8.8
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
@@ -14,3 +15,5 @@ services:
       - "8000:8000"
     depends_on:
       - db
+
+
