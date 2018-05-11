@@ -121,7 +121,7 @@
                     <a href="#">{{member.email}}</a>
                   </td>
                   <td align="center">
-                      Pedagodia
+                    Pedagogia
                   </td>
                   <td align="center">
                     Professor
@@ -145,8 +145,8 @@
                   {% endcomment %}
 
                   <td align="center">
-                      <a href=""> Ver Dados </a>
-                  </td>
+                      <a href="{% url 'profile' member.enrollment %}"> Ver Dados </a>
+                  </td> 
                   <td align="center">
                       <a href=""> Ver Frequência </a>
                   </td>

@@ -20,7 +20,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+from users.views import own_profile
+
 urlpatterns = [
+    path('', own_profile),
     path('users/', include('users.urls')),
     path('disciplines/', include('disciplines.urls')),
     path(r'jet/', include('jet.urls', 'jet')),

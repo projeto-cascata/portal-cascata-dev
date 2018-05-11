@@ -6,6 +6,7 @@
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.css' %}"  media="screen,projection"/>
+      <link type=""
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
       {% block styles %}
       {% endblock %}
@@ -14,21 +15,36 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
 
-    <nav>
-        <div class="nav-wrapper">
-            <img src="{% static 'images/Logo_Branco.png' %}" class="brand-logo"></img>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="">Início</a></li>
-                <li><a href="">Conteúdos</a></li>
-                <li><a href="">Membros</a></li>
-                <li><a href="">Alunos</a></li>
-            </ul>
+        <ul id="creation-dropdown" class="dropdown-content">
+            <li><a href="{% url 'create_news' %}">Escrever Notícia</a></li>          
+        </ul>
+        <nav>
+            <div class="nav-wrapper">
+                <img src="{% static 'images/Logo_Branco.png' %}" class="brand-logo"></img>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="{% url 'profile-redirect' %}">Início</a></li>
+                    <li><a href="{% url 'news_index' %}">Notícias</a></li>
+                    <li><a href="{% url 'disciplines' %}">Conteúdos</a></li>
+                    <li><a href="{% url 'members_list' %}">Membros</a></li>
+                    <li><a href="{% url 'students_list' %}">Alunos</a></li>
+                    <li>
+                      <a 
+                        class="dropdown-trigger" 
+                        href="#!" 
+                        data-target="creation-dropdown">
+                        <i class="material-icons">add</i>
+                      </a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">Sair</a></li>
+                    {% endif %}
+                </ul>
             </div>
         </nav>
         
         <!--JavaScript at end of body for optimized loading-->
         <script type="text/javascript" src="{% static 'js/materialize.js' %}"></script>
-    <main>s
+    <main>
         {% block content %}
         {% endblock %}
     </main>
@@ -55,6 +71,14 @@
                   </div>
                 </div>
         </footer>
-
-    </body>
+      </body>
   </html>
+      
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".dropdown-trigger").dropdown();
+    });
+  </script>
