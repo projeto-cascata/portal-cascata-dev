@@ -35,14 +35,17 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
 INSTALLED_APPS = [
     'jet',
     'users',
+    'news',
+    'disciplines',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tinymce',
     'django.contrib.sites',
-    'invitations',
+    #'invitations',
 ]
 
 AUTH_USER_MODEL = 'users.Account'
@@ -139,5 +142,34 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+LOGIN_URL = '/users/login'
+LOGIN_REDIRECT_URL = '/users/profile/home'
 
-LOGIN_REDIRECT_URL = '/users/profile/180000'
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 360,
+    'width': 1021,
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 20,
+    'selector': 'textarea',
+    'theme': 'modern',
+    'plugins': '''
+            textcolor save link image media preview codesample contextmenu
+            table code lists fullscreen  insertdatetime  nonbreaking
+            contextmenu directionality searchreplace wordcount visualblocks
+            visualchars code fullscreen autolink lists  charmap print  hr
+            anchor pagebreak
+            ''',
+    'toolbar1': '''
+            fullscreen preview bold italic underline | fontselect,
+            fontsizeselect  | forecolor backcolor | alignleft alignright |
+            aligncenter alignjustify | indent outdent | bullist numlist table |
+            | link image media | codesample |
+            ''',
+    'toolbar2': '''
+            visualblocks visualchars |
+            charmap hr pagebreak nonbreaking anchor |  code |
+            ''',
+    'contextmenu': 'formats | link image',
+    'menubar': True,
+    'statusbar': True,
+}

@@ -3,3 +3,6 @@ django-jet==1.0.7
 pytz==2018.3
 Pillow
 psycopg2
+moment==0.8.2
+django-filter
+django-tinymce4-lite

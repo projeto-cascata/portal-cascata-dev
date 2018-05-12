@@ -23,6 +23,7 @@ def generate_enrollment():
 
     return (year + str(id).zfill(4))
 
+
 class AccountManager(BaseUserManager):
     use_in_migrations = True
 
@@ -42,12 +43,13 @@ class AccountManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         return self._create_user(email, password, **extra_fields)
 
+
 class Account(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('e-mail', unique=True)
     first_name = models.CharField('Nome', max_length=40, blank=False)
     last_name = models.CharField('Sobrenome', max_length=80, blank=False)
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=True)
 
     objects = AccountManager()
 
@@ -66,6 +68,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+
 class DefaultUser(Account):
     enrollment = models.CharField('Matrícula', max_length=10, unique=True, default=generate_enrollment)
     
@@ -73,19 +76,43 @@ class DefaultUser(Account):
     rg = models.CharField('RG', max_length=20, blank=False)
     date_birth = models.DateField('Data de Nascimento', blank=False)
     phone_number = models.CharField('Número de Telefone', max_length=15, blank=False)
-    picture = models.ImageField('Foto de Perfil', upload_to='images/', default='images/default.svg')
+    picture = models.ImageField('Foto de Perfil', upload_to='images/users/', default='images/users/default.png')
+
+    class Meta:
+        verbose_name = 'Usuário Base'
+        verbose_name_plural = 'Usuários Base'
+
+    def __str__(self):
+        return self.get_full_name()
+
+
+class Student(DefaultUser):
+    is_member = models.BooleanField(default=False)
+    class Meta:
+        verbose_name = 'Aluno'
+        verbose_name_plural = 'Alunos'
+
+
+class Member(DefaultUser):
+    entrance_date = models.DateField('Data de Ingresso no Projeto', blank=False)
+    course = models.CharField('Curso', max_length=20)
+    semester = models.CharField('Semestre', max_length=20)
+    college_enrollment = models.CharField('Matricula', max_length=10)
+    is_member = models.BooleanField(default=True)    
 
     class Meta:
         verbose_name = 'Membro'
         verbose_name_plural = 'Membros'
 
-    def __str__(self):
-        return self.get_full_name()
+    def get_json(self):
+        return {
+            'enrollment': self.enrollment, 
+            'email': self.email,
+            'name': self.first_name + self.last_name,
+            'course': self.course,
+            'college_enrollment': self.college_enrollment,
+        }
 
-class Student(DefaultUser):
-    class Meta:
-        verbose_name = 'Aluno'
-        verbose_name_plural = 'Alunos'
 
 class Parent(models.Model):
     student = models.OneToOneField(Student, on_delete=models.CASCADE)
