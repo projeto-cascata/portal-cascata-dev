@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView
@@ -22,11 +23,29 @@ class MaterialView(View):
     def get(self, request, discipline_id):
         form = self.form_class()
         discipline = DisciplineComponent.objects.get(pk=discipline_id)
+
         context = {
             'form': form,
             'discipline': discipline,
         }
         return render(request, self.template_name, context=context)
 
-    def post(self, request, *args, **kwargs):
-        ...
+    def post(self, request, discipline_id):
+        form = self.form_class(request.POST, request.FILES)
+        discipline = DisciplineComponent.objects.get(pk=discipline_id)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+
+            post.discipline = discipline
+            post.save()
+
+            # Redirects to last page visited before the creation page.
+            next = request.POST.get('next', '/')
+            return HttpResponseRedirect(next)
+        
+        context = {
+            'form': form,
+            'discipline': discipline,
+        }
+        return render(request, self.template_name, context=context)
