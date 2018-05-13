@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView
+from django.utils.decorators import method_decorator
 
 from .forms import MaterialForm
 from .models import Discipline, DisciplineComponent
@@ -15,10 +17,25 @@ class ListDisciplines(ListView):
 class DetailDiscipline(DetailView):
     model = Discipline
     template_name = "discipline_detail.html"
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
 
+        is_creator = user.has_perm('disciplines.add_material')
+        context['is_creator'] = is_creator
+
+        return context
+
+
+decorators = [permission_required('disciplines.add_material', login_url='/disciplines/')]
+
+@method_decorator(decorators, name='dispatch')
 class MaterialView(View):
     form_class = MaterialForm
     template_name = 'add_material.html'
+    previous_page = ''
 
     def get(self, request, discipline_id):
         form = self.form_class()
@@ -40,9 +57,7 @@ class MaterialView(View):
             post.discipline = discipline
             post.save()
 
-            # Redirects to last page visited before the creation page.
-            next = request.POST.get('next', '/')
-            return HttpResponseRedirect(next)
+            return HttpResponseRedirect('/disciplines/')
         
         context = {
             'form': form,

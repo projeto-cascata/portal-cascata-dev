@@ -15,9 +15,11 @@
 <div class="container">
     <h2>
         {{ object.name }} 
+        {% if is_creator %}        
         <a href="{% url 'add-material' object.pk %}" class="add-link">
             <i class="material-icons">create</i>Adicionar Material
         </a>
+        {% endif %}
     </h2> 
     {% for material in object.material_set.all %}
         <a href="{{ material.uploaded_file.url }}" class="download-link">
@@ -29,15 +31,21 @@
         <li>
             <h4>
                 {{ front.name }}
+                {% if is_creator %}
                 <a href="{% url 'add-material' front.pk %}" class="add-link">
                     <i class="material-icons">create</i>Adicionar Material
                 </a>
+                {% endif %}
             </h4>
-            {% for material in front.material_set.all %}
-                <a href="{{ material.uploaded_file.url }}" class="download-link">
-                    {{ material.name }}
-                </a>
-            {% endfor %}
+            <ul>
+                {% for material in front.material_set.all %}
+                    <li>
+                        <a href="{{ material.uploaded_file.url }}" class="download-link">
+                            {{ material.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
         </li>
     {% endfor %}
     </ul>
