@@ -4,12 +4,18 @@ from django.contrib.auth import get_user
 from users.models import Member
 from django.http import HttpResponse
 from django.contrib.auth.decorators import permission_required
+from django.views.generic.list import ListView
+from django.utils import timezone
 
 from .forms import NewsForm
+from .models import NewsItem
 
 # Create your views here.
 def index(request):
     return HttpResponse('<h1> News Index </h1>')
+
+def list_news(request):
+    return render(request, 'news/news_list.html')
 
 @permission_required('news.add_newsitem', login_url='/news/index/')
 def create_news(request):
@@ -36,3 +42,16 @@ def create_news(request):
             return HttpResponseRedirect('/news/index/')
     else:
         return HttpResponse('Unauthorized', status=401)
+
+
+class NewsList(ListView):
+    model = NewsItem
+
+    context_object_name = 'news'
+    template_name = 'news_list.html'
+    #paginate_by = 50  # if pagination is desired
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
