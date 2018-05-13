@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<style>
+    .add-link {
+        font-size: 1rem;
+    }
+    .download-link {
+        font-size: 1.5rem;
+    }
+</style>
+
+<div class="container">
+    <h2>
+        {{ object.name }} 
+        {% if is_creator %}        
+        <a href="{% url 'add-material' object.pk %}" class="add-link">
+            <i class="material-icons">create</i>Adicionar Material
+        </a>
+        {% endif %}
+    </h2> 
+    {% for material in object.material_set.all %}
+        <a href="{{ material.uploaded_file.url }}" class="download-link">
+            {{ material.name }}
+        </a>
+    {% endfor %}
+    <ul>
+    {% for front in object.disciplinefront_set.all %}
+        <li>
+            <h4>
+                {{ front.name }}
+                {% if is_creator %}
+                <a href="{% url 'add-material' front.pk %}" class="add-link">
+                    <i class="material-icons">create</i>Adicionar Material
+                </a>
+                {% endif %}
+            </h4>
+            <ul>
+                {% for material in front.material_set.all %}
+                    <li>
+                        <a href="{{ material.uploaded_file.url }}" class="download-link">
+                            {{ material.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+  
+{% endblock %}

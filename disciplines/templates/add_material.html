@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+    <h2>Adicionar Material - {{ discipline.name }}</h2>
+    <form action="{% url 'add-material' discipline.pk %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div>
+            <input type="hidden" name="next" value="{{ request.path }}"/>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Enviar
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
