@@ -30,7 +30,7 @@
         <div class="panel-body">
             {% for discipline in object_list %}
                 <div class="container">
-                    <a href="{{discipline.id}}">
+                    <a href="{% url 'detail-discipline' discipline.pk %}">
                         <img class="discipline-cover" src=../../media/{{discipline.cover}} height="200" width="800">
                          <div class="bottom-right"> {{ discipline.name }} </div>
                     </a>
