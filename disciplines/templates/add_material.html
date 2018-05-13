@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+    <h2>Adicionar Material - {{ discipline.name }}</h2>
+    {{ form.as_p }}
+</div>
+{% endblock %}
