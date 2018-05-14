@@ -70,3 +70,13 @@ class StudentsList(ListView):
         students = Student.objects.all()
         context['filter'] = StudentFilter(self.request.GET, queryset=students)
         return context
+
+def invite_students(request):
++    form = EmailForm()
++    if request.method == 'POST':
++        form = EmailForm(request.POST)
++        if form.is_valid():
++            form_cleaned = form.cleaned_data
++            email = form_cleaned['email']
++            invite = Invitation.create(email, inviter=request.user)
++            invite.send_invitation(request)
