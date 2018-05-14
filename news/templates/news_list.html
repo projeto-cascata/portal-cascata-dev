@@ -2,24 +2,74 @@
 
 {% block content %}
 
+<style>
+	.div {
+    width: 960px;
+   
+    margin: 0 auto;
+    font-size: 1.1em;
+    padding: 20px;
+    text-align: justify;
+    align-self: center;
+  }
+
+  .data {
+    font-weight: bold;
+    font-size: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    -webkit-text-size-adjust: none;
+    position: relative;
+    left: 740px;
+    display: inline-block;
+  }
+</style>
 
 <h1>Notícias</h1>
 <body>
-    <div class="container">
-            {% for newsitem in object_list %}
-                <div class="card hoverable">
-                    <a href="#">
-                            <div class="card-content card">
-                            <h2>{{ newsitem.title }}</h2>
-                            <p><b>Postado em:</b> {{ newsitem.posted_at }} </p>
-                            <p><b>Escrito por:</b> {{ newsitem.posted_by }} </p>
-                        </div><!-- .card-content -->
-                    </a>
-                </div>    
-                {% empty %}
-                    No news yet.
-                {% endfor %}
-    </div>
+	<div class="container">
+		{% for newsitem in object_list %}
+			<div class="card hoverable">
+				<a data-target="modal1" class="btn modal-trigger">
+					<div class="card-content card">
+						<h2>{{ newsitem.title }}</h2>
+						<p><b>Postado em:</b> {{ newsitem.posted_at }} </p>
+						<p><b>Escrito por:</b> {{ newsitem.posted_by }} </p>
+					</div>
+				</a>
+			</div>    
+		{% empty %}
+				No news yet.
+		{% endfor %}
+	</div>
+
+	<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+  <div id="modal1" class="modal">
+		<div class="container">
+			<div class="row">
+				<div class="panel panel-default user_panel">
+					<div class="panel-heading">
+						<h3 class="panel-title">{{ newsitem.title }}</h3>
+					</div>
+					<div class="div">
+						<div>      
+							<p>{{ newsitem.body }}</p>
+							<p class="data">Postado em {{ newsitem.posted_at }} por {{ newsitem.posted_by }}</p>  
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 </body>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, options);
+  });
+</script>
 
 {% endblock %}
