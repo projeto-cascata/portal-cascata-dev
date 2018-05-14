@@ -1,25 +1,50 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
+
 
 {% block content %}
 
+<style>
+    .container {
+        position: relative;
+    }
 
-<h1>Notícias</h1>
-<body>
-    <div class="container">
+    .bottom-right {
+        position: absolute;
+        bottom: 8px;
+        right: -100px;
+        background-color: rgba(255,255,255,0.5);
+        color: Black;
+        padding: 5px 10px;
+        font-size: 20px;
+        font-weight: bolder;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+      <div class="panel panel-default user_panel">
+        <div class="panel-heading">
+          <h3 class="panel-title"> Notícias </h3>
+        </div>
+        <div class="panel-body">
             {% for newsitem in object_list %}
                 <div class="card hoverable">
                     <a href="#">
-                            <div class="card-content card">
-                            <h2>{{ newsitem.title }}</h2>
+                        <div class="card-content card">
+                            <h4>{{ newsitem.title }}</h4>
                             <p><b>Postado em:</b> {{ newsitem.posted_at }} </p>
                             <p><b>Escrito por:</b> {{ newsitem.posted_by }} </p>
                         </div><!-- .card-content -->
                     </a>
                 </div>    
-                {% empty %}
-                    No news yet.
-                {% endfor %}
+            {% empty %}
+                <p> Não há notícias cadastradas!</p>
+            {% endfor %}
+        </div>
+      </div>
     </div>
-</body>
+  </div>
+
 
 {% endblock %}
