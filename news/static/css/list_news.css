@@ -1,0 +1,36 @@
+/* .container {
+  display: inline-block;
+  margin: 0 auto;
+  align-self: center;
+}
+
+.card {
+	display: inline-block;
+	background: white;
+	margin-top: 0.5vh;
+	margin-left: 2vw;
+	margin-right: 2vw;
+
+	
+  }
+  
+  .card-content {
+	padding: 1.4em;
+	align-self: center;
+  }
+  
+  .card-content h2 {
+	margin-top: 0;
+	margin-bottom: .5em;
+	font-weight: normal;
+  }
+  
+  .card-content p {
+	font-size: 95%;
+	text-align: justify;
+  }
+  
+  /* .card a:hover {
+	box-shadow: 3px 3px 8px hsl(0, 0%, 70%);
+	transition: all 0.4s;
+  } */ 
