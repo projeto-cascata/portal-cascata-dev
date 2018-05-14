@@ -11,4 +11,5 @@ urlpatterns = [
     path('profile/<int:user_id>/', views.profile, name='profile'),
     path('members_list/', views.MembersList.as_view(), name='members_list'),
     path('students_list/', views.StudentsList.as_view(), name='students_list'),
+    url(r'^invite_students/$', views.invite_students),
 ]
